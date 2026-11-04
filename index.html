@@ -278,7 +278,7 @@ setInterval(function(){var e=document.getElementById("clk");if(e)e.textContent=c
 (function(){
  if(typeof firebase==="undefined"){V.innerHTML='<div class="card kp"><div class="big">⚠️</div><h2>سكريبتات Firebase ما حمّلتش</h2><div class="sub" style="margin-top:8px">اتأكد من النت وجرّب تاني</div><button class="b" onclick="location.reload()" style="width:100%;margin-top:10px">إعادة المحاولة</button></div>';return}
  if(FB.projectId==="PASTE"){V.innerHTML='<div class="card kp"><div class="big">⚙️</div><h2>لسه ما اتربطش بـ Firebase</h2><div class="sub" style="margin-top:8px">الصق إعدادات Firebase في أول الملف (متغير FB).</div></div>';return}
- firebase.initializeApp(FB);DB=firebase.firestore();// Use Firebase default transport settings; avoid conflicting long-polling options.var first=true;
+ firebase.initializeApp(FB);DB=firebase.firestore();var first=true;
  setTimeout(function(){if(first)V.innerHTML='<div class="card kp"><div class="big">⚠️</div><h2>الاتصال بقاعدة البيانات بطيء</h2><div class="sub" style="margin-top:8px">لسه بيحاول، أو في مشكلة في قواعد Firebase</div><button class="b" onclick="location.reload()" style="width:100%;margin-top:10px">إعادة المحاولة</button></div>'},10000);
  firebase.auth().onAuthStateChanged(function(u){CE=!!u;if(!first&&!document.querySelector(".mo")&&!curPage)home()});
  DB.doc("app/state").onSnapshot(function(sn){var d=sn.exists&&sn.data();
