@@ -47,9 +47,9 @@ input,select,textarea{border-color:#d6e1e5;background:#fbfcfd;border-radius:11px
 </style>
 </head>
 <body>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script crossorigin="anonymous" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script crossorigin="anonymous" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script crossorigin="anonymous" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <div class="brand"><b>Queen 👑</b><span>تسجيل الحضور والانصراف</span></div>
 <div id="v"></div><div id="toast"></div>
 <script>
@@ -57,7 +57,7 @@ input,select,textarea{border-color:#d6e1e5;background:#fbfcfd;border-radius:11px
 var FB={apiKey:"AIzaSyBQUkIaVGI40fp68vPW8KAdzE_w0rkv6D8",authDomain:"queen-a9f5b.firebaseapp.com",projectId:"queen-a9f5b",appId:"1:520746986939:web:40b9fd202bfd8f2247e89e"};
 var K="att_v2",DEF=[],OLDD=["الكوتينج","السايزنج","النسيج + السداية","الإدارة","الخدمات","المصبغة"];
 var S={workers:[],log:[],cfg:{mpin:null,start:"08:00",end:"16:00",grace:10,off:5,selfie:false,usePin:true,depts:DEF,radius:150,useLoc:false,loc:null},lock:{},hol:[],leaves:[],adv:[]},unl=0,V=document.getElementById("v");
-window.onerror=function(m){V.innerHTML='<div class="card kp"><div class="big">⚠️</div><h2>حصل خطأ</h2><div class="sub" dir="ltr" style="margin-top:8px">'+m+'</div><button class="b" onclick="location.reload()" style="width:100%;margin-top:10px">إعادة المحاولة</button></div>'};
+window.onerror=function(m,src,line,col,err){var detail=String(m||"خطأ غير معروف");if(src)detail+="<br>"+esc(src.split("/").pop())+":"+line+":"+col;if(err&&err.stack)detail+="<pre style=\"white-space:pre-wrap;text-align:left;font-size:11px\">"+esc(err.stack)+"</pre>";V.innerHTML='<div class="card kp"><div class="big">⚠️</div><h2>حصل خطأ</h2><div class="sub" dir="ltr" style="margin-top:8px">'+detail+'</div><button class="b" onclick="location.reload()" style="width:100%;margin-top:10px">إعادة المحاولة</button></div>';return false};window.addEventListener("unhandledrejection",function(e){var m=e.reason&&e.reason.stack?e.reason.stack:String(e.reason||"Promise error");V.innerHTML='<div class="card kp"><div class="big">⚠️</div><h2>خطأ أثناء الاتصال</h2><div class="sub" dir="ltr" style="white-space:pre-wrap;margin-top:8px">'+esc(m)+'</div><button class="b" onclick="location.reload()" style="width:100%;margin-top:10px">إعادة المحاولة</button></div>'});
 var DB=null,CE=false,curPage=null;try{var rawL=localStorage.getItem(K+"_lock");if(rawL)S.lock=JSON.parse(rawL)}catch(e){}
 function norm(){S.cfg=Object.assign({start:"08:00",end:"16:00",grace:10,off:5,selfie:false,usePin:true,depts:DEF,radius:150,useLoc:false,loc:null},S.cfg||{});S.lock=S.lock||{};S.hol=S.hol||[];S.leaves=S.leaves||[];S.adv=S.adv||[];S.cfg.depts=[]}
 norm();
