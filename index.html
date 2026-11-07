@@ -173,7 +173,7 @@ function wSearch(){VIEW="home";clearInterval(tick);
  rs.onclick=e=>{const b=e.target.closest("[data-id]");if(b)wWork(W.find(x=>x.id===b.dataset.id))}}
 /* ---- تحميل البيانات ---- */
 let first=true;
-function err(){$("app").innerHTML='<div class="card kp"><div class="big">⚠️</div><h2>مفيش اتصال بالبيانات</h2><div class="sub" style="margin:8px 0">اتأكد من النت وجرّب تاني</div><button class="b" onclick="location.reload()">إعادة المحاولة</button></div>'}
+function err(e){const d=e?String(e.code||e.message||e):"";$("app").innerHTML='<div class="card kp"><div class="big">⚠️</div><h2>مفيش اتصال بالبيانات</h2><div class="sub" style="margin:8px 0">اتأكد من النت وصلاحيات قراءة بيانات العامل.</div>'+(d?'<div class="sub" dir="ltr" style="font-size:12px;overflow-wrap:anywhere;margin:10px 0">'+esc(d)+'</div>':"")+'<button class="b" onclick="location.reload()">إعادة المحاولة</button></div>'}
 function apply(o){W.length=0;W.push(...(o.workers||[]).filter(w=>!w.arch));HOL.length=0;HOL.push(...(o.hol||[]));applyCfg(o.cfg);if(first){first=false;wHome()}}
 function startData(){
  DB.doc("app/public").onSnapshot(sn=>{if(sn.exists){try{apply(JSON.parse(sn.data().json))}catch(e){err()}}else DB.doc("app/state").get().then(s=>{if(s.exists){try{apply(JSON.parse(s.data().json))}catch(e){err()}}else apply({})}).catch(err)},err);
